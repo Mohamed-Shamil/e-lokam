@@ -1,0 +1,363 @@
+@custom-variant dark (&:is(.dark *));
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --font-size: 16px;
+  --background: #F8FAF8;
+  --foreground: #1A1A1A;
+  --card: #ffffff;
+  --card-foreground: #1A1A1A;
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  
+  /* Sprout Theme - Nature Greens */
+  --primary: #2D7A4F;
+  --primary-foreground: #ffffff;
+  --primary-light: #52B788;
+  --primary-dark: #1B4D3E;
+  
+  /* Deep Blues for Trust */
+  --secondary: #1E5A8E;
+  --secondary-foreground: #ffffff;
+  --secondary-light: #4A90D9;
+  
+  /* Soft Greys for Background */
+  --muted: #E8EEF0;
+  --muted-foreground: #5A6C7D;
+  --accent: #D8E2DC;
+  --accent-foreground: #1A1A1A;
+  
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 0, 0, 0.1);
+  --input: transparent;
+  --input-background: #f8faf9;
+  --switch-background: #cbced4;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: oklch(0.708 0 0);
+  
+  /* Custom Sprout Colors */
+  --sprout-green: #2D7A4F;
+  --sprout-green-light: #74C69D;
+  --sprout-green-pale: #B7E4C7;
+  --sprout-blue: #1E5A8E;
+  --sprout-blue-light: #4A90D9;
+  --sprout-grey: #E8EEF0;
+  --sprout-grey-dark: #5A6C7D;
+  
+  /* Biophilic Design Colors for Medical/Social Care */
+  --bio-sage: #8B9D83;
+  --bio-forest: #2D5016;
+  --bio-sunflower: #FFB627;
+  --bio-leaf: #A8D5A5;
+  --bio-earth: #C9A882;
+  --bio-sky: #E8F4F8;
+  
+  --chart-1: #2D7A4F;
+  --chart-2: #1E5A8E;
+  --chart-3: #74C69D;
+  --chart-4: #4A90D9;
+  --chart-5: #B7E4C7;
+  
+  --radius: 0.75rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: #2D7A4F;
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: #52B788;
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* Custom Sprout Colors */
+  --color-sprout-green: var(--sprout-green);
+  --color-sprout-green-light: var(--sprout-green-light);
+  --color-sprout-green-pale: var(--sprout-green-pale);
+  --color-sprout-blue: var(--sprout-blue);
+  --color-sprout-blue-light: var(--sprout-blue-light);
+  --color-sprout-grey: var(--sprout-grey);
+  --color-sprout-grey-dark: var(--sprout-grey-dark);
+  
+  /* Biophilic Design Colors for Medical/Social Care */
+  --color-bio-sage: var(--bio-sage);
+  --color-bio-forest: var(--bio-forest);
+  --color-bio-sunflower: var(--bio-sunflower);
+  --color-bio-leaf: var(--bio-leaf);
+  --color-bio-earth: var(--bio-earth);
+  --color-bio-sky: var(--bio-sky);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=' text-']), :not(:has([class^='text-'])))) {
+    h1 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h3 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h4 {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    label {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+/* Sidebar Layout Fixes - Prevent content overlap */
+/* Critical: Sidebar wrapper must use flex column layout for navbar + sidebar/content */
+[data-slot="sidebar-wrapper"] {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  overflow: hidden !important;
+}
+/* Navbar at top - full width */
+[data-slot="sidebar-wrapper"] > header {
+  width: 100% !important;
+  flex-shrink: 0 !important;
+}
+/* Sidebar and content row container */
+[data-slot="sidebar-wrapper"] > .sidebar-content-row {
+  display: flex !important;
+  flex-direction: row !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  width: 100% !important;
+}
+
+/* Sidebar gap creates space - must not shrink and must be visible */
+[data-slot="sidebar-gap"] {
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  display: block !important;
+  visibility: visible !important;
+  height: 100% !important;
+}
+
+/* Sidebar container is fixed positioned */
+[data-slot="sidebar-container"] {
+  position: fixed !important;
+}
+
+/* Sidebar component should not shrink */
+[data-slot="sidebar"] {
+  flex-shrink: 0 !important;
+}
+
+/* SidebarInset takes remaining space after gap */
+[data-slot="sidebar-inset"] {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  width: auto !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  margin-left: 0 !important;
+}
+
+/* All content inside SidebarInset must respect boundaries */
+[data-slot="sidebar-inset"] > * {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Main content should grow */
+[data-slot="sidebar-inset"] > main {
+  flex: 1 1 auto !important;
+  overflow-y: auto !important;
+}
+
+/* Footer should not grow */
+[data-slot="sidebar-inset"] > footer {
+  flex-shrink: 0 !important;
+}
+
+/* Containers must respect boundaries */
+[data-slot="sidebar-inset"] .container,
+[data-slot="sidebar-inset"] [class*="container"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* All nested elements must respect boundaries */
+[data-slot="sidebar-inset"] * {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Prevent any component from extending beyond sidebar inset */
+[data-slot="sidebar-inset"] section,
+[data-slot="sidebar-inset"] div,
+[data-slot="sidebar-inset"] article {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Mobile App Specific Styles */
+/* Safe area for notched devices (iOS) */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+}
+
+/* Prevent zoom on input focus (iOS Safari) */
+input, textarea, select {
+  font-size: 16px !important;
+}
+
+/* Mobile optimizations */
+@media screen and (max-width: 768px) {
+  body {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Prevent text selection on mobile (optional, can be removed if needed) */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Better touch targets */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}

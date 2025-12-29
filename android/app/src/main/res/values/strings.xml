@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">e-Lokam</string>
+    <string name="title_activity_main">e-Lokam</string>
+    <string name="package_name">com.elokam.panchayat</string>
+    <string name="custom_url_scheme">com.elokam.panchayat</string>
+</resources>
