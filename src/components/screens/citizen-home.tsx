@@ -325,19 +325,19 @@ export function CitizenHome({ onNavigate, currentUserRole }: CitizenHomeProps) {
       </Card>
 
       {/* Quick Action Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         <Card 
           className="hover:shadow-lg transition-shadow cursor-pointer border-l-4"
           style={{ borderLeftColor: '#2D5016', backgroundColor: '#F0F8EF' }}
           onClick={() => onNavigate('social-care')}
         >
-          <CardContent className="p-6 text-center">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: '#8B9D83' }}>
-              <Heart className="w-8 h-8 text-white" />
+          <CardContent className="p-3 md:p-6 text-center">
+            <div className="w-10 h-10 md:w-16 md:h-16 mx-auto mb-2 md:mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: '#8B9D83' }}>
+              <Heart className="w-5 h-5 md:w-8 md:h-8 text-white" />
             </div>
-            <h4>Social Care Hub</h4>
-            <p className="text-sm text-muted-foreground mt-1">സാമൂഹിക പരിചരണം</p>
-            <p className="text-xs text-muted-foreground mt-2">ASHA, Palliative, Emergency</p>
+            <h4 className="text-sm md:text-base font-semibold">Social Care Hub</h4>
+            <p className="text-xs md:text-sm text-muted-foreground mt-1">സാമൂഹിക പരിചരണം</p>
+            <p className="text-xs text-muted-foreground mt-1 md:mt-2 hidden md:block">ASHA, Palliative, Emergency</p>
           </CardContent>
         </Card>
 
@@ -346,13 +346,13 @@ export function CitizenHome({ onNavigate, currentUserRole }: CitizenHomeProps) {
           style={{ borderLeftColor: '#FFB627', backgroundColor: '#FFF8E1' }}
           onClick={() => onNavigate('health-request')}
         >
-          <CardContent className="p-6 text-center">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: '#FFB627' }}>
-              <Heart className="w-8 h-8 text-white" />
+          <CardContent className="p-3 md:p-6 text-center">
+            <div className="w-10 h-10 md:w-16 md:h-16 mx-auto mb-2 md:mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: '#FFB627' }}>
+              <Heart className="w-5 h-5 md:w-8 md:h-8 text-white" />
             </div>
-            <h4>Request Visit</h4>
-            <p className="text-sm text-muted-foreground mt-1">സന്ദർശനം അഭ്യർത്ഥിക്കുക</p>
-            <p className="text-xs text-muted-foreground mt-2">Medical, Checkup, Emergency</p>
+            <h4 className="text-sm md:text-base font-semibold">Request Visit</h4>
+            <p className="text-xs md:text-sm text-muted-foreground mt-1">സന്ദർശനം അഭ്യർത്ഥിക്കുക</p>
+            <p className="text-xs text-muted-foreground mt-1 md:mt-2 hidden md:block">Medical, Checkup, Emergency</p>
           </CardContent>
         </Card>
 
@@ -361,13 +361,13 @@ export function CitizenHome({ onNavigate, currentUserRole }: CitizenHomeProps) {
           style={{ borderLeftColor: '#2D7A4F' }}
           onClick={() => onNavigate('grievance')}
         >
-          <CardContent className="p-6 text-center">
-            <div className="w-16 h-16 mx-auto mb-4 bg-[#2D7A4F] rounded-full flex items-center justify-center">
-              <MessageSquareText className="w-8 h-8 text-white" />
+          <CardContent className="p-3 md:p-6 text-center">
+            <div className="w-10 h-10 md:w-16 md:h-16 mx-auto mb-2 md:mb-4 bg-[#2D7A4F] rounded-full flex items-center justify-center">
+              <MessageSquareText className="w-5 h-5 md:w-8 md:h-8 text-white" />
             </div>
-            <h4>Report Issue</h4>
-            <p className="text-sm text-muted-foreground mt-1">പരാതി റിപ്പോർട്ട് ചെയ്യുക</p>
-            <p className="text-xs text-muted-foreground mt-2">Water, Roads, Electricity</p>
+            <h4 className="text-sm md:text-base font-semibold">Report Issue</h4>
+            <p className="text-xs md:text-sm text-muted-foreground mt-1">പരാതി റിപ്പോർട്ട് ചെയ്യുക</p>
+            <p className="text-xs text-muted-foreground mt-1 md:mt-2 hidden md:block">Water, Roads, Electricity</p>
           </CardContent>
         </Card>
 
@@ -376,13 +376,13 @@ export function CitizenHome({ onNavigate, currentUserRole }: CitizenHomeProps) {
           style={{ borderLeftColor: '#1E5A8E' }}
           onClick={() => onNavigate('profile')}
         >
-          <CardContent className="p-6 text-center">
-            <div className="w-16 h-16 mx-auto mb-4 bg-[#1E5A8E] rounded-full flex items-center justify-center">
-              <User className="w-8 h-8 text-white" />
+          <CardContent className="p-3 md:p-6 text-center">
+            <div className="w-10 h-10 md:w-16 md:h-16 mx-auto mb-2 md:mb-4 bg-[#1E5A8E] rounded-full flex items-center justify-center">
+              <User className="w-5 h-5 md:w-8 md:h-8 text-white" />
             </div>
-            <h4>My Profile</h4>
-            <p className="text-sm text-muted-foreground mt-1">എന്റെ പ്രൊഫൈൽ</p>
-            <p className="text-xs text-muted-foreground mt-2">Settings & Information</p>
+            <h4 className="text-sm md:text-base font-semibold">My Profile</h4>
+            <p className="text-xs md:text-sm text-muted-foreground mt-1">എന്റെ പ്രൊഫൈൽ</p>
+            <p className="text-xs text-muted-foreground mt-1 md:mt-2 hidden md:block">Settings & Information</p>
           </CardContent>
         </Card>
       </div>
