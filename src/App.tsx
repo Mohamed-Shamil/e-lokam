@@ -21,7 +21,9 @@ import {
   Calendar,
   DollarSign,
   FileText,
-  MapPin
+  MapPin,
+  Trash2,
+  Phone
 } from 'lucide-react';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { Button } from './components/ui/button';
@@ -46,7 +48,6 @@ import {
 import { CitizenHome } from './components/screens/citizen-home';
 import { SocialCareHub } from './components/social-care-hub';
 import { HealthRequest } from './components/health-request';
-import { MedicalChat } from './components/medical-chat';
 import { UserProfile } from './components/user-profile';
 import { GrievanceWizard } from './components/grievance-wizard';
 import { MyComplaints } from './components/my-complaints';
@@ -71,6 +72,13 @@ import { UserManagement } from './components/admin/user-management';
 import { WardManagement } from './components/admin/ward-management';
 import { ContentManagement } from './components/admin/content-management';
 
+import { ElectedMembers } from './components/elected-members';
+import { CreatePost } from './components/create-post';
+import { WardResources } from './components/ward-resources';
+import { FormsManagement } from './components/forms-management';
+import { WasteManagement } from './components/waste-management';
+import { EmergencyServices } from './components/emergency-services';
+
 import { Login } from './components/auth/login';
 import { Register } from './components/auth/register';
 
@@ -79,13 +87,13 @@ type Screen =
   | 'citizen-home' 
   | 'social-care' 
   | 'health-request' 
-  | 'medical-chat' 
   | 'citizen-chat'
   | 'grievance'
   | 'my-complaints'
   | 'complaint-status'
   | 'notifications'
   | 'profile'
+  | 'elected-members'
   | 'pravasi-home'
   | 'parent-tracker'
   | 'leader-dashboard'
@@ -99,7 +107,12 @@ type Screen =
   | 'admin-portal'
   | 'user-management'
   | 'ward-management'
-  | 'content-management';
+  | 'content-management'
+  | 'create-post'
+  | 'ward-resources'
+  | 'forms-management'
+  | 'waste-management'
+  | 'emergency-services';
 
 interface NavItem {
   id: Screen;
@@ -114,8 +127,11 @@ const navItems: NavItem[] = [
   { id: 'notifications', label: 'Notifications', labelMl: 'അറിയിപ്പുകൾ', icon: Bell, role: ['citizen', 'pravasi', 'leader', 'admin'] },
   { id: 'social-care', label: 'Social Care Hub', labelMl: 'സാമൂഹിക പരിചരണം', icon: Heart, role: ['citizen', 'pravasi'] },
   { id: 'health-request', label: 'Request Visit', labelMl: 'സന്ദർശനം', icon: Stethoscope, role: ['citizen', 'pravasi'] },
-  { id: 'medical-chat', label: 'Medical Chat', labelMl: 'മെഡിക്കൽ ചാറ്റ്', icon: MessageSquare, role: ['citizen', 'pravasi'] },
   { id: 'citizen-chat', label: 'Chat', labelMl: 'ചാറ്റ്', icon: MessageCircle, role: ['citizen', 'pravasi'] },
+  { id: 'elected-members', label: 'Elected Members', labelMl: 'തെരഞ്ഞെടുക്കപ്പെട്ട അംഗങ്ങൾ', icon: Users, role: ['citizen', 'pravasi', 'leader'] },
+  { id: 'forms-management', label: 'Forms', labelMl: 'ഫോമുകൾ', icon: FileText, role: ['citizen', 'pravasi', 'leader', 'admin'] },
+  { id: 'waste-management', label: 'Waste Management', labelMl: 'മാലിന്യ മാനേജ്മെന്റ്', icon: Trash2, role: ['citizen', 'pravasi', 'leader'] },
+  { id: 'emergency-services', label: 'Emergency Services', labelMl: 'എമർജൻസി സേവനങ്ങൾ', icon: Phone, role: ['citizen', 'pravasi', 'leader', 'admin'] },
   { id: 'grievance', label: 'Report Issue', labelMl: 'പരാതി', icon: MessageSquareText, role: ['citizen', 'pravasi'] },
   { id: 'my-complaints', label: 'My Complaints', labelMl: 'എന്റെ പരാതികൾ', icon: AlertTriangle, role: ['citizen', 'pravasi'] },
   { id: 'profile', label: 'My Profile', labelMl: 'പ്രൊഫൈൽ', icon: User, role: ['citizen', 'pravasi'] },
@@ -124,6 +140,9 @@ const navItems: NavItem[] = [
   { id: 'parent-tracker', label: 'Parent Care', labelMl: 'മാതാപിതാക്കൾ', icon: Heart, role: ['pravasi'] },
   
   { id: 'leader-dashboard', label: 'Dashboard', labelMl: 'ഡാഷ്‌ബോർഡ്', icon: LayoutDashboard, role: ['leader'] },
+  { id: 'citizen-home', label: 'Community Feed', labelMl: 'കമ്മ്യൂണിറ്റി ഫീഡ്', icon: Home, role: ['leader'] },
+  { id: 'create-post', label: 'Create Post', labelMl: 'പോസ്റ്റ് സൃഷ്ടിക്കുക', icon: FileText, role: ['leader'] },
+  { id: 'ward-resources', label: 'Ward Resources', labelMl: 'വാർഡ് വിഭവങ്ങൾ', icon: Building2, role: ['leader'] },
   { id: 'ward-users', label: 'Citizens', labelMl: 'പൗരൻമാർ', icon: Users, role: ['leader'] },
   { id: 'ward-chat', label: 'Chat', labelMl: 'ചാറ്റ്', icon: MessageCircle, role: ['leader'] },
   { id: 'complaints-management', label: 'Complaints', labelMl: 'പരാതികൾ', icon: AlertTriangle, role: ['leader', 'admin'] },
@@ -213,13 +232,11 @@ function AppContent() {
   const renderScreen = () => {
     switch (currentScreen) {
       case 'citizen-home':
-        return <CitizenHome onNavigate={handleStringNavigation} />;
+        return <CitizenHome onNavigate={handleStringNavigation} currentUserRole={currentRole} />;
       case 'social-care':
         return <SocialCareHub />;
       case 'health-request':
         return <HealthRequest />;
-      case 'medical-chat':
-        return <MedicalChat />;
       case 'citizen-chat':
         return <CitizenChat />;
       case 'grievance':
@@ -232,12 +249,36 @@ function AppContent() {
         return <Notifications />;
       case 'profile':
         return <UserProfile />;
+      case 'elected-members':
+        return <ElectedMembers 
+          currentUserRole={currentRole} 
+          onChat={(memberId) => {
+            setCurrentScreen('citizen-chat');
+          }} 
+        />;
       case 'pravasi-home':
         return <PravasiHome onNavigate={handleStringNavigation} />;
       case 'parent-tracker':
         return <PravasiParentTracker />;
       case 'leader-dashboard':
         return <LeaderDashboard />;
+      case 'create-post':
+        return <CreatePost 
+          onPostCreated={() => {
+            setCurrentScreen('citizen-home');
+          }}
+          onCancel={() => {
+            setCurrentScreen('citizen-home');
+          }}
+        />;
+      case 'ward-resources':
+        return <WardResources />;
+      case 'forms-management':
+        return <FormsManagement canAddForms={currentRole === 'leader' || currentRole === 'admin'} />;
+      case 'waste-management':
+        return <WasteManagement />;
+      case 'emergency-services':
+        return <EmergencyServices />;
       case 'ward-users':
         return <WardUsers />;
       case 'ward-chat':
@@ -384,6 +425,26 @@ function AppContent() {
           max-width: 100% !important;
           box-sizing: border-box !important;
         }
+        /* Make sidebar content scrollable on mobile */
+        [data-sidebar="content"] {
+          overflow-y: auto !important;
+          overflow-x: hidden !important;
+          flex: 1 1 auto !important;
+          min-height: 0 !important;
+        }
+        /* Ensure sidebar itself is scrollable on mobile */
+        @media (max-width: 768px) {
+          [data-sidebar="sidebar"] {
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            max-height: calc(100vh - 80px) !important;
+          }
+          [data-sidebar="content"] {
+            max-height: calc(100vh - 160px) !important;
+            overflow-y: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+          }
+        }
       `}</style>
       
       {/* Top Navbar - Full Width */}
@@ -397,8 +458,20 @@ function AppContent() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3 min-w-0 flex-shrink">
               <SidebarTrigger className="text-white hover:bg-white/20 md:block hidden shrink-0" />
-              <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center shrink-0">
-                <Sprout className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shrink-0 overflow-hidden">
+                <img 
+                  src="/logo.png" 
+                  alt="e-Lokam Logo" 
+                  className="w-full h-full object-contain p-1"
+                  onError={(e) => {
+                    // Fallback to icon if image not found
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    if (target.parentElement) {
+                      target.parentElement.innerHTML = '<svg class="w-6 h-6 text-[#2D7A4F]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/></svg>';
+                    }
+                  }}
+                />
               </div>
               <div className="min-w-0">
                 <h1 className="text-xl truncate">e-Lokam</h1>
@@ -484,7 +557,7 @@ function AppContent() {
                   <Menu className="w-6 h-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-80">
+              <SheetContent side="right" className="w-80 overflow-y-auto">
                 <div className="py-6 space-y-6">
                   <div>
                     <h3 className="mb-3">Select Role</h3>
@@ -553,8 +626,20 @@ function AppContent() {
         >
           <SidebarHeader className="p-4 border-b border-white/20">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center shrink-0">
-                <Sprout className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shrink-0 overflow-hidden">
+                <img 
+                  src="/logo.png" 
+                  alt="e-Lokam Logo" 
+                  className="w-full h-full object-contain p-1"
+                  onError={(e) => {
+                    // Fallback to icon if image not found
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    if (target.parentElement) {
+                      target.parentElement.innerHTML = '<svg class="w-6 h-6 text-[#2D7A4F]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/></svg>';
+                    }
+                  }}
+                />
               </div>
               <div className="peer-data-[collapsible=icon]:hidden">
                 <h1 className="text-lg font-semibold text-white">e-Lokam</h1>
@@ -563,7 +648,7 @@ function AppContent() {
             </div>
           </SidebarHeader>
 
-          <SidebarContent>
+          <SidebarContent className="overflow-y-auto overflow-x-hidden flex-1 min-h-0">
             <SidebarGroup>
               <SidebarGroupLabel>Navigation</SidebarGroupLabel>
               <SidebarGroupContent>
