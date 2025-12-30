@@ -3,12 +3,16 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
+import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 import { 
   Phone, 
   Lock, 
   ArrowRight,
   CheckCircle2,
-  Loader2
+  Loader2,
+  Info,
+  X,
+  AlertCircle
 } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import {
@@ -31,6 +35,8 @@ export function Login({ onLoginSuccess }: LoginProps) {
   const [enteredOtp, setEnteredOtp] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [selectedRole, setSelectedRole] = useState<'citizen' | 'pravasi' | 'leader' | 'admin'>('citizen');
+  const [showOtpInfo, setShowOtpInfo] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Mock OTP - in real app, this would come from backend
   const generateOTP = () => {
@@ -42,20 +48,22 @@ export function Login({ onLoginSuccess }: LoginProps) {
       return;
     }
     setIsLoading(true);
+    setErrorMessage('');
     // Simulate API call
     setTimeout(() => {
       const generatedOtp = generateOTP();
       setOtp(generatedOtp);
       setStep('otp');
+      setShowOtpInfo(true);
       setIsLoading(false);
       // In real app, OTP would be sent via SMS
-      alert(t(`OTP sent to ${phone}. For demo, OTP is: ${generatedOtp}`, `OTP ${phone} എന്ന നമ്പറിലേക്ക് അയച്ചു. ഡെമോയ്ക്ക്, OTP: ${generatedOtp}`));
     }, 1500);
   };
 
   const handleVerifyOTP = () => {
     if (enteredOtp === otp) {
       setIsLoading(true);
+      setErrorMessage('');
       // Simulate verification
       setTimeout(() => {
         setIsLoading(false);
@@ -66,7 +74,7 @@ export function Login({ onLoginSuccess }: LoginProps) {
         onLoginSuccess(phone, selectedRole);
       }, 1000);
     } else {
-      alert(t('Invalid OTP. Please try again.', 'അസാധുവായ OTP. ദയവായി വീണ്ടും ശ്രമിക്കുക.'));
+      setErrorMessage(t('Invalid OTP. Please try again.', 'അസാധുവായ OTP. ദയവായി വീണ്ടും ശ്രമിക്കുക.'));
     }
   };
 
@@ -74,7 +82,8 @@ export function Login({ onLoginSuccess }: LoginProps) {
     const newOtp = generateOTP();
     setOtp(newOtp);
     setEnteredOtp('');
-    alert(t(`New OTP sent. For demo, OTP is: ${newOtp}`, `പുതിയ OTP അയച്ചു. ഡെമോയ്ക്ക്, OTP: ${newOtp}`));
+    setErrorMessage('');
+    setShowOtpInfo(true);
   };
 
   return (
@@ -160,6 +169,41 @@ export function Login({ onLoginSuccess }: LoginProps) {
             </>
           ) : (
             <>
+              {/* OTP Info Alert - Demo Only */}
+              {showOtpInfo && (
+                <Alert className="bg-blue-50 border-blue-200 relative">
+                  <Info className="h-4 w-4 text-blue-600" />
+                  <div className="flex-1">
+                    <AlertTitle className="text-blue-900 mb-2">{t('OTP Sent', 'OTP അയച്ചു')}</AlertTitle>
+                    <AlertDescription className="text-blue-800">
+                      <div className="space-y-2">
+                        <p>{t('OTP has been sent to', 'OTP അയച്ചു')} <strong>{phone}</strong></p>
+                        <div className="bg-white p-4 rounded-lg border-2 border-blue-300 shadow-sm">
+                          <p className="text-xs text-muted-foreground mb-2 text-center">{t('For demo purposes, your OTP is:', 'ഡെമോയ്ക്ക്, നിങ്ങളുടെ OTP:')}</p>
+                          <p className="text-3xl font-bold text-blue-900 tracking-widest text-center font-mono py-2">{otp}</p>
+                        </div>
+                        <p className="text-xs text-blue-700 text-center">{t('In production, this will be sent via SMS', 'പ്രൊഡക്ഷനിൽ, ഇത് SMS വഴി അയയ്ക്കും')}</p>
+                      </div>
+                    </AlertDescription>
+                  </div>
+                  <button
+                    onClick={() => setShowOtpInfo(false)}
+                    className="absolute top-3 right-3 text-blue-600 hover:text-blue-800 transition-colors"
+                    aria-label="Close"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </Alert>
+              )}
+
+              {/* Error Message */}
+              {errorMessage && (
+                <Alert variant="destructive">
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertDescription>{errorMessage}</AlertDescription>
+                </Alert>
+              )}
+
               {/* OTP Input */}
               <div className="space-y-2">
                 <Label htmlFor="otp">{t('Enter OTP', 'OTP നൽകുക')}</Label>
@@ -168,7 +212,10 @@ export function Login({ onLoginSuccess }: LoginProps) {
                   type="text"
                   placeholder={t('Enter 6 digit OTP', '6 അക്ക OTP നൽകുക')}
                   value={enteredOtp}
-                  onChange={(e) => setEnteredOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                  onChange={(e) => {
+                    setEnteredOtp(e.target.value.replace(/\D/g, '').slice(0, 6));
+                    setErrorMessage('');
+                  }}
                   maxLength={6}
                   className="text-center text-2xl tracking-widest"
                 />

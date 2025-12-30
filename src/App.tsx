@@ -23,7 +23,11 @@ import {
   FileText,
   MapPin,
   Trash2,
-  Phone
+  Phone,
+  Award,
+  CreditCard,
+  Folder,
+  Lightbulb
 } from 'lucide-react';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { Button } from './components/ui/button';
@@ -78,6 +82,11 @@ import { WardResources } from './components/ward-resources';
 import { FormsManagement } from './components/forms-management';
 import { WasteManagement } from './components/waste-management';
 import { EmergencyServices } from './components/emergency-services';
+import { DigitalCertificates } from './components/digital-certificates';
+import { PaymentGateway } from './components/payment-gateway';
+import { ProjectTracking } from './components/project-tracking';
+import { DocumentLibrary } from './components/document-library';
+import { Suggestions } from './components/suggestions';
 
 import { Login } from './components/auth/login';
 import { Register } from './components/auth/register';
@@ -112,7 +121,12 @@ type Screen =
   | 'ward-resources'
   | 'forms-management'
   | 'waste-management'
-  | 'emergency-services';
+  | 'emergency-services'
+  | 'digital-certificates'
+  | 'payment-gateway'
+  | 'project-tracking'
+  | 'document-library'
+  | 'suggestions';
 
 interface NavItem {
   id: Screen;
@@ -130,6 +144,11 @@ const navItems: NavItem[] = [
   { id: 'citizen-chat', label: 'Chat', labelMl: 'ചാറ്റ്', icon: MessageCircle, role: ['citizen', 'pravasi'] },
   { id: 'elected-members', label: 'Elected Members', labelMl: 'തെരഞ്ഞെടുക്കപ്പെട്ട അംഗങ്ങൾ', icon: Users, role: ['citizen', 'pravasi', 'leader'] },
   { id: 'forms-management', label: 'Forms', labelMl: 'ഫോമുകൾ', icon: FileText, role: ['citizen', 'pravasi', 'leader', 'admin'] },
+  { id: 'digital-certificates', label: 'Certificates', labelMl: 'സർട്ടിഫിക്കറ്റുകൾ', icon: Award, role: ['citizen', 'pravasi', 'leader'] },
+  { id: 'payment-gateway', label: 'Payments', labelMl: 'പേയ്‌മെന്റുകൾ', icon: CreditCard, role: ['citizen', 'pravasi', 'leader'] },
+  { id: 'project-tracking', label: 'Projects', labelMl: 'പദ്ധതികൾ', icon: Building2, role: ['citizen', 'pravasi', 'leader', 'admin'] },
+  { id: 'document-library', label: 'Documents', labelMl: 'രേഖകൾ', icon: Folder, role: ['citizen', 'pravasi', 'leader', 'admin'] },
+  { id: 'suggestions', label: 'Suggestions', labelMl: 'നിർദ്ദേശങ്ങൾ', icon: Lightbulb, role: ['citizen', 'pravasi', 'leader'] },
   { id: 'waste-management', label: 'Waste Management', labelMl: 'മാലിന്യ മാനേജ്മെന്റ്', icon: Trash2, role: ['citizen', 'pravasi', 'leader'] },
   { id: 'emergency-services', label: 'Emergency Services', labelMl: 'എമർജൻസി സേവനങ്ങൾ', icon: Phone, role: ['citizen', 'pravasi', 'leader', 'admin'] },
   { id: 'grievance', label: 'Report Issue', labelMl: 'പരാതി', icon: MessageSquareText, role: ['citizen', 'pravasi'] },
@@ -279,6 +298,16 @@ function AppContent() {
         return <WasteManagement />;
       case 'emergency-services':
         return <EmergencyServices />;
+      case 'digital-certificates':
+        return <DigitalCertificates />;
+      case 'payment-gateway':
+        return <PaymentGateway />;
+      case 'project-tracking':
+        return <ProjectTracking />;
+      case 'document-library':
+        return <DocumentLibrary />;
+      case 'suggestions':
+        return <Suggestions />;
       case 'ward-users':
         return <WardUsers />;
       case 'ward-chat':
